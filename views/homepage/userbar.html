@@ -1,0 +1,91 @@
+{% block userbar %}
+  <!-- Thimble user bar for homepage and project list -->
+  <nav class="navbar-thimble container-flex {% if showGlitchDialog %}navbar-fix{% endif %}">
+    <div id="navbar-left" class="container-flex">
+      <div class="navbar-logo-container">
+        <a href="/{{ locale }}" class="logo">
+          <img src="/img/thimble-logo.svg" class="thimble-logo-full">
+        </a>
+      </div>
+      <div class="main-nav">
+
+        <a href="/{{ locale }}" class="{% if pageName == 'home' %}selected{% endif %}">{{ gettext("userbarGetStarted") }}</a>
+        <a href="/{{ locale }}/features" class="{% if pageName == 'features' %}selected{% endif %}">{{ gettext("userbarCoolFeatures") }}</a>
+        <a href="/{{ locale }}/get-involved" class="{% if pageName == 'get-involved' %}selected{% endif %}">{{ gettext("userbarGetInvolved") }}</a>
+        {% if glitchExportEnabled %}
+        <a href="/{{ locale }}/moving-to-glitch" class="{% if pageName == 'moving-to-glitch' %}selected{% endif %}">{{ gettext("userbarMovingToGlitch") }}</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div id="navbar-right" class="container-flex">
+
+      <div id="navbar-locale" class="nav-chunk">
+        <div class="dropdown">
+          <div class="dropdown-toggle">
+            {{ languages[locale].nativeName }}
+            <img class="icon-arrow-down" src="/img/icon/dropdown-arrow.svg">
+          </div>
+          <div class="dropdown-content">
+            <ul class="language-list">
+              {% for langCode, obj in languages %}
+                <li><a {% if langCode == locale %} class="selected" {% endif %} target="_self" href="/{{ langCode }}{{ URL_PATHNAME }}">{{ obj.nativeName }}</a></li>
+              {% endfor %}
+            </ul>
+            <!-- We're going to disable this for now until we figure out where to link this to
+            <p class="bottom-message">
+              Don't see your language? <a href="#">Help add it.</a>
+            </p>
+            -->
+          </div>
+        </div>
+      </div>
+
+      <div id="navbar-login" class="{% if username %}signed-in{% endif %} nav-chunk" >
+        <div id="navbar-login-inner">
+        {% if username %}
+          <div id="navbar-logged-in" class="dropdown">
+            <div class="dropdown-toggle">
+              <img class="avatar" src="{{avatar}}">
+              {{ gettext("loginWelcome") | instantiate }}
+              <img class="icon-arrow-down" src="/img/icon/dropdown-arrow.svg" />
+            </div>
+
+            <div class="dropdown-content">
+              <ul class="dropdown">
+                {% if not shutdownNewProjectsAndPublishing %}
+                <li>
+                  <a id="new-project-link" href="/{{ locale }}/projects/new">
+                    <img src="/img/icon/new-project.svg" />
+                    {{ gettext("newProjectLink") }}
+                  </a>
+                </li>
+                {% endif %}
+                <li>
+                  <a href="/{{ locale }}/projects/{{ queryString }}" target="_self">
+                    <img src="/img/icon/your-projects.svg" />
+                    {{ gettext("yourProjectsLink") }}
+                  </a>
+                </li>
+                <li>
+                  <a href="{{ logoutURL }}" id="logout-link" target="_self">
+                    <img src="/img/icon/sign-out.svg" />
+                    {{ gettext("signOutLink") }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+        {% else %}
+          <div id="navbar-anonymous">
+            {% if shutdownNewAccounts %}
+            {{ gettext("signInPromptHomepage2") | instantiate | safe }}
+            {% else %}
+            {{ gettext("signInPromptHomepage") | instantiate | safe }}
+            {% endif %}
+          </div>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
+{% endblock %}

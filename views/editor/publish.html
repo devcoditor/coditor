@@ -1,0 +1,49 @@
+{% block publishdialog %}
+{% set learnMoreURL = "https://github.com/mozilla/thimble.mozilla.org/wiki/Using-Thimble-FAQ#why-do-i-need-an-indexhtml-file-when-publishing-my-project" %}
+<div id="publish-ssooverride" class="hide"
+     data-loginUrl="{{ loginURL }}"
+     data-oauth-username="{{ username }}"
+     data-oauth-avatar="{{ avatar }}">
+</div>
+
+<div id="publish-dialog" class="hide">
+  <div class="content">
+
+    <h1>{{ gettext("publishHeader") }}</h1>
+
+    <div id="publish-changes" class="hide">
+      <p>{{ gettext("publishChangesPrompt") }}</p>
+      <div id="publish-button-update">{{ gettext("publishChangesBtn") }}</div>
+    </div>
+
+    <div id="publish-live" class="hide">
+      <p>{{ gettext("publishShareLink") }}</p>
+      <div id="publish-link">
+        <a id="link-publish-link" title="{{ gettext("publishShareLinkTitle") }}" target="_blank" href="test"></a>
+      </div>
+
+      <div id="publish-button-unpublish">
+        <img src="/img/icon/garbage-can-white.svg">
+        <span>{{ gettext("publishDeleteBtn") }}</span>
+      </div>
+    </div>
+
+    <div id="publish-details">
+      <label>{{ gettext("publishProjectDescription") }}</label>
+      <textarea class="publish-description" placeholder="{{ gettext("publishProjectDescriptionPlaceholder") }}"></textarea>
+    </div>
+
+  </div>
+
+  <div id="publish-buttons">
+    <div id="no-index">{{ gettext("noIndexFound_2") | instantiate | safe }}</div>
+    <div id="publish-button-cancel">{{ gettext("publishCancelBtn") }}</div>
+    <div id="publish-button-publish">{{ gettext("publishBtn") }}</div>
+  </div>
+
+  <div id="updateDialog" class="hide">
+    <div id="no-index-update" class="hide" >{{ gettext("noIndexFound_2") | instantiate | safe }}</div>
+  </div>
+</div>
+
+{% endblock %}

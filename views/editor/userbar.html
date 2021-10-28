@@ -1,0 +1,127 @@
+{% block userbar %}
+  <!-- webmaker user bar -->
+  <nav class="navbar-thimble container-flex">
+
+    <div id="navbar-left" class="container-flex">
+      <div class="navbar-logo-container small-logo">
+        <a href="/{{ locale }}" class="logo" title="{{ gettext("backToHomepage") }}">
+          <img src="/img/thimble-icon.svg" class="thimble-logo">
+        </a>
+      </div>
+      <div title="{{ gettext("renameProjectInputBoxTitle") }}" id="navbar-project-title" class="shadow">
+        <span id="project-rename-save">{{ gettext("renameProjectSaveBtn") }}</span>
+        <span id="navbar-rename-project">
+          <img src="/img/icon/edit.svg" class="icon-edit">
+        </span>
+      </div>
+      <div id="navbar-save-indicator" class="hide">
+        {{ gettext("fileSavingIndicator") }}
+      </div>
+    </div>
+
+    <div id="navbar-right" class="container-flex">
+      {% set publishBtnTitle = gettext("publishBtnTitle") %}
+
+      <div title="{{ gettext("helpIconTitle") }}" id="navbar-help" class="nav-chunk">
+        <div class="dropdown">
+          <div  class="dropdown-toggle">
+            {{ gettext("help") }}
+            <img class="icon-arrow-down" src="/img/icon/dropdown-arrow.svg">
+          </div>
+          <div class="dropdown-content">
+            <ul>
+              <li><a target = "_blank" href="https://github.com/mozilla/thimble.mozilla.org/wiki/Thimble-Troubleshooting">{{ gettext("helpTroubleshooting") }}</a></li>
+              <li><a target = "_blank" href="https://github.com/mozilla/thimble.mozilla.org/wiki/Using-Thimble-FAQ">{{ gettext("helpFAQ") }}</a></li>
+              <li><a target = "_blank" href="https://github.com/mozilla/thimble.mozilla.org/wiki/About-Thimble">{{ gettext("helpFeatures") }}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="navbar-locale" class="nav-chunk">
+        <div class="dropdown">
+          <div class="dropdown-toggle">
+            {{ languages[locale].nativeName }}
+            <img class="icon-arrow-down" src="/img/icon/dropdown-arrow.svg">
+          </div>
+          <div class="dropdown-content">
+            <ul class="language-list">
+              {% for langCode, obj in languages %}
+                <li><a target="_self" {% if langCode == locale %} class="selected" {% endif %} href="/{{ langCode }}{{ URL_PATHNAME }}">{{ obj.nativeName }}</a></li>
+              {% endfor %}
+            </ul>
+            <!-- We're going to disable this for now until we figure out where to link this to
+            <p class="bottom-message">
+              Don't see your language? <a href="#">Help add it.</a>
+            </p>
+            -->
+          </div>
+        </div>
+      </div>
+
+      <div id="navbar-login" class="{% if username %}signed-in{% endif %} nav-chunk">
+        <div id="navbar-login-inner">
+        {% if username %}
+          <div id="navbar-logged-in" class="dropdown">
+            <div class="dropdown-toggle">
+              <img class="avatar" src="{{avatar}}">
+              <span>{{ gettext("loginWelcome") | instantiate }}</span>
+              <img class="icon-arrow-down" src="/img/icon/dropdown-arrow.svg">
+            </div>
+            <div class="dropdown-content">
+              <ul>
+                {% if not shutdownNewProjectsAndPublishing %}
+                <li>
+                  <a id="new-project-link" href="/{{ locale }}/projects/new">
+                    <img src="/img/icon/new-project.svg" />
+                    {{ gettext("newProjectLink") }}
+                  </a>
+                </li>
+                {% endif %}
+                <li>
+                  <a id="delete-project-link">
+                    <img src="/img/icon/garbage-can.svg" />
+                    {{ gettext("deleteProjectLink") }}
+                  </a>
+                </li>
+                <li>
+                  <a href="/{{ locale }}/projects/{{ queryString }}" target="_self">
+                    <img src="/img/icon/your-projects.svg" />
+                    {{ gettext("yourProjectsLink") }}
+                  </a>
+                </li>
+                <li>
+                  <a href="#" id="export-project-zip" target="_self">
+                    <img src="/img/icon/download-cloud.svg">
+                    {{ gettext("downloadProjectLink") }}
+                  </a>
+                </li>
+                <li>
+                  <a href="{{ logoutURL }}" id="logout-link" target="_self">
+                    <img src="/img/icon/sign-out.svg" />
+                    {{ gettext("signOutLink") }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        {% elseif not shutdownNewAccounts %}
+          {% set publishBtnOpenTag = '<span title="{{ publishBtnTitle }}" id="navbar-publish-button"><img src="/img/icon/publish.svg" class="icon-publish">' | instantiate | safe %}
+          {% set publishBtnCloseTag = '</span>' | safe %}
+          <div id="navbar-anonymous">
+            {{ gettext("signInPromptEditor") | instantiate | safe }}
+          </div>
+        {% endif %}
+        </div>
+      </div>
+
+    {% if username and not shutdownNewProjectsAndPublishing %}
+      <div id="navbar-publish" class="nav-chunk">
+        <div title="{{ publishBtnTitle }}" id="navbar-publish-button"><img src="/img/icon/publish.svg" class="icon-publish">{{ gettext("publishBtn") }}
+        </div>
+      </div>
+    {% endif %}
+    </div>
+    <div class="dialog-overlay"></div>
+  </nav>
+{% endblock %}

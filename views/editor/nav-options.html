@@ -1,0 +1,228 @@
+<div class="editor-nav">
+
+  <!-- FILE TREE -->
+  <div class="filetree-pane-nav hide">
+    <div class="nav-container">
+      <div data-adapt-order="1" class="filetree-pane-nav-title">
+        {{ gettext("navFiles") }}
+      </div>
+
+      <div class="flex-container pull-right">
+        <div id="filetree-pane-nav-add">
+          <div title="{{ gettext("navAddFileIconTitle") }}" class="filetree-pane-nav-btn"></div>
+        </div>
+
+        <div id="filetree-pane-nav-add-menu" class="hide">
+          <ul>
+            <li title="{{ gettext("navHTMLTitle") }}" id="filetree-pane-nav-add-html"><span>{{ gettext("navHTMLFile") }}</span>
+            <li title="{{ gettext("navCSSTitle") }}" id="filetree-pane-nav-add-css"><span>{{ gettext("navCSSFile") }}</span>
+            <li title="{{ gettext("navJavascriptTitle") }}" id="filetree-pane-nav-add-js"><span>{{ gettext("navJavascriptFile") }}</span>
+            <li title="{{ gettext("navTutorialTitle") }}" id="filetree-pane-nav-add-tutorial"><span>{{ gettext("navTutorialFile") }}</span>
+            <li title="{{ gettext("navAddFolderTitle") }}" id="filetree-pane-nav-add-folder"><span>{{ gettext("navAddFolder") }}</span>
+            <li title="{{ gettext("navUploadTitle") }}" id="filetree-pane-nav-add-upload"><span>{{ gettext("navUploadFile") }}</span>
+            <li title="{{ gettext("downloadProjectLink") }}" id="filetree-pane-nav-export-project-zip" class="top-border"><span>{{ gettext("downloadProjectLink") }}</span>
+          </ul>
+          <div class="arrow-tip"></div>
+        </div>
+
+        <div title="{{ gettext("navCollapseFileTrayIconTitle") }}" id="filetree-pane-nav-hide">
+          <div class="filetree-pane-nav-btn"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEFT SIDE - Editor -->
+  <div class="editor-pane-nav">
+
+    <div class="nav-container">
+      <div title="{{ gettext("navExpandFileTrayIconTitle") }}" id="editor-pane-nav-fileview">
+        <div></div>
+      </div>
+
+      <span data-adapt-order="2" class="editor-pane-nav-title">{{ gettext("navEditor") }}</span>
+
+      <span data-adapt-order="4" id="editor-pane-nav-filename"></span>
+
+      <div class="flex-container pull-right">
+
+        <div data-adapt-order="6" title="{{ gettext("navUndoTitle") }}" id="editor-pane-nav-undo">
+          <img src="/img/icon/undo.svg">
+          <span data-adapt-order="1">{{ gettext("navUndo") }}</span>
+        </div>
+
+        <div data-adapt-order="5" title="{{ gettext("navRedoIconTitle") }}" id="editor-pane-nav-redo">
+          <img src="/img/icon/redo.svg">
+        </div>
+
+        <div data-adapt-order="3" id="editor-pane-nav-snippets" title="{{ gettext("navInsertSnippetIconTitle") }}">
+          <img src="/img/icon/snippets.svg">
+        </div>
+        <div class="snippets-menu-container hide">
+          <div class="snippets-menu">
+            <header>
+              <h2 class="snippets-menu-title">{{ gettext("snippetMenuTitle") }}</h2>
+              <div class="snippets-categories">
+                <span data-type="html" class="active">HTML</span>
+                <span data-type="css">CSS</span>
+                <span data-type="js">JS</span>
+              </div>
+            </header>
+
+            <div class="snippets">
+              <ul class="snippets-list">
+              {% for snippet in snippets.html %}
+                <li data-type="html" data-snippet-id="{{snippet.id}}" title="{{ gettext(snippet.title) }}" {{ 'class=selected' if loop.first }}>{{ gettext(snippet.name) }}</li>
+              {% endfor %}
+              {% for snippet in snippets.css %}
+                <li data-type="css" data-snippet-id="{{snippet.id}}" class="hide{{ ' selected' if loop.first }}" title="{{ gettext(snippet.title) }}">{{ gettext(snippet.name) }}</li>
+              {% endfor %}
+              {% for snippet in snippets.js %}
+                <li data-type="js" data-snippet-id="{{snippet.id}}" class="hide{{ ' selected' if loop.first }}" title="{{ gettext(snippet.title) }}">{{ gettext(snippet.name) }}</li>
+              {% endfor %}
+              </ul>
+
+              <div class="snippets-preview-pane">
+              {% for snippet in snippets.html %}
+                <div data-type="html" data-snippet-id="{{snippet.id}}" class="{{ 'hide ' if not loop.first }}snippets-preview">
+                  <pre>{{ snippet.data.value | instantiate if snippet.data.l10n else snippet.data.value }}</pre>
+                  <button>{{ gettext("snippetButtonLabel") }}</button>
+                </div>
+              {% endfor %}
+              {% for snippet in snippets.css %}
+                <div data-type="css" data-snippet-id="{{snippet.id}}" class="hide snippets-preview">
+                  <pre>{{ snippet.data.value | instantiate if snippet.data.l10n else snippet.data.value }}</pre>
+                  <button>{{ gettext("snippetButtonLabel") }}</button>
+                </div>
+              {% endfor %}
+              {% for snippet in snippets.js %}
+                <div data-type="js" data-snippet-id="{{snippet.id}}" class="hide snippets-preview">
+                  <pre>{{ snippet.data.value | instantiate if snippet.data.l10n else snippet.data.value }}</pre>
+                  <button>{{ gettext("snippetButtonLabel") }}</button>
+                </div>
+              {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="arrow-tip"></div>
+        </div>
+
+        <div data-adapt-order="6" title="{{ gettext("navEditorOptionsIconTitle") }}" id="editor-pane-nav-options">
+          <img src="/img/icon/gear-white.svg">
+        </div>
+        <div id="editor-pane-nav-options-menu" class="hide">
+          <ul>
+            <li title="{{ gettext("navTextSizeTitle") }}" id="editor-option-textsize">
+              <span>{{ gettext("navTextSize") }}</span>
+                &nbsp;(<span id="editor-pane-nav-font-size"></span>)
+              <div class="text-size-ui">
+                <div title="{{ gettext("navDecreaseTextSizeIconTitle") }}" id="editor-pane-nav-decrease-font" class="font-size-button"></div>
+                <div title="{{ gettext("navIncreaseTextSizeIconTitle") }}" id="editor-pane-nav-increase-font" class="font-size-button"></div>
+              </div>
+            </li>
+            <li title="{{ gettext("navColorThemeTitle") }}" id="editor-option-colortheme">
+              <span>{{ gettext("navColorTheme") }}</span>
+              <div id="editor-pane-nav-toggle-theme">
+                <div id="theme-active"></div>
+                <div title="{{ gettext("navDarkThemeIconTitle") }}" id="theme-dark">
+                  <img id="moon-white" src="/img/icon/theme-moon-white.svg" width="15px" height="15px">
+                  <img id="moon-green" class="hide" src="/img/icon/theme-moon-green.svg" width="15px" height="15px">
+                </div>
+                <div title="{{ gettext("navLightThemeIconTitle") }}" id="theme-light">
+                  <img id="sun-white" class="hide" src="/img/icon/theme-sun-white.svg" width="20px" class="hide" height="20px">
+                  <img id="sun-green" src="/img/icon/theme-sun-green.svg" width="20px" height="20px">
+                </div>
+              </div>
+            </li>
+            <li title="{{ gettext("navWrapTextTitle") }}" id="editor-option-wraptext">
+              <span>{{ gettext("navWrapText") }}</span>
+              <div  class="switch-toggle switch-enabled" id="line-wrap-toggle">
+                <div class="toggle-backing"></div>
+                <div class="toggle-button"></div>
+              </div>
+            </li>
+            <li title="{{ gettext("navAllowJSTitle") }}" id="editor-option-allowjs">
+              <span>{{ gettext("navAllowJS") }}</span>
+              <div  class="switch-toggle switch-enabled" id="allow-scripts-toggle">
+                <div class="toggle-backing"></div>
+                <div class="toggle-button"></div>
+              </div>
+            </li>
+            <li title="{{ gettext("navAllowWSTitle") }}" id="editor-option-allowws">
+              <span>{{ gettext("navAllowWS") }}</span>
+              <div  class="switch-toggle switch-enabled" id="allow-whitespace-toggle">
+                <div class="toggle-backing"></div>
+                <div class="toggle-button"></div>
+              </div>
+            </li>
+            <li title="{{ gettext("navAutoEncloseTagsTitle") }}" id="editor-option-autoenclosetags">
+              <span>{{ gettext("navAutoEncloseTags") }}</span>
+              <div  class="switch-toggle switch-enabled" id="auto-tags-toggle">
+                <div class="toggle-backing"></div>
+                <div class="toggle-button"></div>
+              </div>
+            </li>
+            <li title="{{ gettext("navAutoCompleteTitle") }}" id="editor-option-autocomplete">
+              <span>{{ gettext("navAutoComplete") }}</span>
+              <div  class="switch-toggle switch-enabled" id="autocomplete-toggle">
+                <div class="toggle-backing"></div>
+                <div class="toggle-button"></div>
+              </div>
+            </li>
+            <li title="{{ gettext("navXMLSVGTitle") }}" id="editor-option-svgedit">
+              <span>{{ gettext("navSVGedit") }}</span>
+              <div  class="switch-toggle switch-enabled" id="edit-SVG-toggle">
+                <div class="toggle-backing"></div>
+                <div class="toggle-button"></div>
+              </div>
+            </li>
+          </ul>
+          <div class="arrow-tip"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE - Preview & Tutorial -->
+
+  <div class="preview-pane-nav">
+    <div class="nav-container">
+      <div class="preview-tutorial-toggle" data-adapt-order="1">
+        <span title="{{ gettext("navPreviewTitle") }}" id="preview-title" class="preview-pane-nav-title preview-title-highlighted">{{ gettext("navPreview") }}</span>
+        <span title="{{ gettext("navViewTutorialTitle") }}" id="tutorial-title" class="preview-pane-nav-title hide">{{ gettext("navViewTutorial") }}</span>
+      </div>
+
+      <div class="refresh-wrapper enabled" data-adapt-order="5" >
+        <div title="{{ gettext("navRefreshPreviewIconTitle") }}" id="preview-pane-nav-refresh">
+          <img src="/img/icon/refresh.svg">
+        </div>
+        <div data-adapt-order="2" title="{{ gettext("navToggleAutoUpdateTitle") }}" class="toggle-auto-update">
+          <span class="checkbox">
+            <img class="checkbox-icon" src="/img/icon/checkmark-white.svg"/>
+          </span>
+          {{ gettext("navToggleAutoUpdateLabel") }}
+        </div>
+      </div>
+
+      <div class="flex-container pull-right">
+        <div data-adapt-order="3" title="{{ gettext("navDOMElementInspectorIconTitle") }}" id="preview-pane-nav-inspector">
+          <div class="icon-wrapper"></div>
+        </div>
+        <div data-adapt-order="4" class="preview-device-toggle">
+          <img title="{{ gettext("navDesktopPreviewIconTitle") }}" id="preview-pane-nav-desktop" class="viewmode-active" src="/img/icon/desktop.svg">
+          <img title="{{ gettext("navMobilePreviewIconTitle") }}" id="preview-pane-nav-phone" class="viewmode-inactive" src="/img/icon/phone-portrait.svg">
+        </div>
+        <div class="fullscreen-preview-toggle">
+          <div class="enable-fullscreen" title="{{ gettext("navEnableFullscreenPreviewIconTitle") }}">
+            <img src="/img/icon/fullscreen-on.svg">
+          </div>
+          <div class="disable-fullscreen" title="{{ gettext("navDisableFullscreenPreviewIconTitle") }}">
+            <img src="/img/icon/fullscreen-off.svg">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

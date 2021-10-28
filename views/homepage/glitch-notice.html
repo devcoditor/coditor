@@ -1,0 +1,34 @@
+{% block glitchnotice %}
+  <link rel="stylesheet" href="/resources/stylesheets/glitch.css">
+
+  <div class="glitch glitch-banner container-flex hidden">
+    <div class="glitch-banner-content" class="container-flex">
+      <span class="notice">
+        <i class="glitch-logo"></i>{{ gettext("movingNotice") | instantiate | safe}}
+      </span>
+
+      <a class="more-info" href="{{ moreInfoURL }}" target="_blank">{{ gettext("readAboutMoving") }}</a>
+
+      <a class="btn export-button" href="/projects">
+        <i class="export-icon"></i><span class="label">{{ gettext("startExporting") }}</span>
+      </a>
+    </div>
+  </div>
+
+  {% if showGlitchDialog %}
+  <div class="glitch glitch-cta underlay hidden">
+    <div class="glitch-cta content">
+      <img class="cta-close" src="/img/clear.svg" tabindex="0">
+      <i class="glitch-logo"></i>
+      <h1>{{ gettext("weAreMoving") | safe }}</h1>
+      <p>{{ gettext("takeAction") | instantiate | safe }}</p>
+      <p>
+        <a class="btn export-button" href="/projects">
+          <i class="export-icon"></i><span class="label">{{ gettext("startExporting") }}</span>
+        </a>
+      </p>
+      <p class="notice">{{ gettext("learnMore") | instantiate | safe }}</p>
+    </div>
+  </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,9 @@
+.DS_Store
+.vagrant
+node_modules
+.env
+.heroku
+*.log
+npm-debug.log.*
+dist/
+package-lock.json

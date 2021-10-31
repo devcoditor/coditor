@@ -51,7 +51,7 @@ The following is an abbreviated guide to getting it all set up. Please see each 
 ### Manually Installing the Parts
 Please note: On Windows, use ``copy`` instead of ``cp``
 
-### Installing Brackets (Bramble)
+#### Installing Brackets (Bramble)
 - Fork the [Brackets repository](https://github.com/socialisewrld/brackets) and then clone it to your local machine using `git clone --recursive https://github.com/<your_username>/brackets.git` (replace `<your_username>` with your Github username for the account you forked Brackets into)
 - In the cloned repository directory, run `npm install` to install the dependencies for Brackets
 - Run `npm run build` to create the built editor files that will be used by Thimble

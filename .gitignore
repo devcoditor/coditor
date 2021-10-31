@@ -1,3 +1,13 @@
+.DS_Store
+.vagrant
+node_modules
+.env
+.heroku
+*.log
+npm-debug.log.*
+dist/
+package-lock.json
+
 # Logs
 logs
 *.log
@@ -102,3 +112,4 @@ dist
 
 # TernJS port file
 .tern-port
+

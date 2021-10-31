@@ -2,6 +2,36 @@
 
 By leveraging WASM for software containerization, we create universal binaries that work live and anywhere without modification, including operating systems like Linux, macOS, Windows, and also web browsers. Wasm automatically sandboxes applications by default for secure execution, shielding the host environment from malicious code, bugs and vulnerabilities in the software it runs. 
 
+# Setup/Installation
+
+Visual Editor interacts with the Publish API (source managed in [publish.webmaker.org](https://github.com/mozilla/publish.webmaker.org)) to store users, projects, files and other content as well as publish user projects.
+
+For authentication and user management, Visual Editor uses Webmaker OAuth which consists of the Webmaker ID System (source managed in [id.webmaker.org](https://github.com/socialisewrld/id.webmaker.org)) and the Webmaker Login API (source managed in [login.webmaker.org](https://github.com/socialisewrld/login.webmaker.org)).
+
+All three services are bundled together using Git subtrees to be run together using Vagrant, or, they may be run separately with Visual Editor [manually](#manual-installation).
+
+**Note:** The Git subtree bundle mentioned above for use with the automated installation can be found in the `/services` folder. It contains a subtree for each of the three services. These subtrees are not automatically kept in sync with their corresponding service's parent repositories. If you need to update one of the subtrees to match the history of its parent repository, follow these instructions:
+  - Create a separate branch and checkout to it.
+  - Run the following to get the history of the service's repository:
+
+  ```
+  git fetch https://github.com/socialisewrld/<service's repository name> <branch name>
+  ```
+
+  Replace `<service's repository name>` with the remote repository name of the service you are trying to update and `<branch name>` with the name of the branch on that repository you want to update the subtree with.<br>
+  For e.g. `git fetch https://github.com/socialisewrld/publish.webmaker.org master`.
+  - Now to update the subtree, run:
+
+  ```
+  git subtree pull --prefix services/<service's repository name> https://github.com/socialisewrld/<service's repository name> <branch name> --squash
+  ```
+
+  Replace `<service's repository name>` and `<branch name>` with the same values you used in the previous command.<br>
+  For e.g. `git subtree pull --prefix services/publish.webmaker.org https://github.com/socialisewrld/publish.webmaker.org master --squash`.
+  - Update your remote branch with this new change.
+  - Open a pull request to have the subtree update reviewed and merged.
+
+
 ## Manual Installation
 
 ### Prerequisites for Manual Installation
@@ -28,13 +58,13 @@ Please note: On Windows, use ``copy`` instead of ``cp``
 * Run ``npm start`` to start the server
 
 #### id.webmaker.org
-* Clone https://github.com/mozilla/id.webmaker.org
+* Clone https://github.com/socialisewrld/id.webmaker.org
 * Run ``cp sample.env .env`` to create an environment file
 * Run ``npm install`` to install dependencies
 * Run ``npm start`` to start the server
 
 #### login.webmaker.org
-* Clone https://github.com/mozilla/login.webmaker.org
+* Clone https://github.com/socialisewrld/login.webmaker.org
 * Run ``npm install`` to install dependencies
 * Run ``cp env.sample .env`` to create an environment file
 * Run ``npm start`` the server
@@ -47,7 +77,7 @@ Please note: On Windows, use ``copy`` instead of ``cp``
 
 #### publish.webmaker.org
 * These steps assume you've followed the PostgreSQL steps above, including creating the publish database.
-* Clone https://github.com/mozilla/publish.webmaker.org
+* Clone https://github.com/socialisewrld/publish.webmaker.org
 * Run ``npm install`` to install dependencies
 * Run ``npm run env``
 * Run ``npm run knex`` to seed the publish database created earlier

@@ -1,12 +1,12 @@
-# Visual Editor
+# Web Maker
 
 By leveraging WASM for software containerization, we create universal binaries that work live and anywhere without modification, including operating systems like Linux, macOS, Windows, and also web browsers. Wasm automatically sandboxes applications by default for secure execution, shielding the host environment from malicious code, bugs and vulnerabilities in the software it runs. 
 
 ## Setup/Installation
 
-Visual Editor interacts with the Publish API (source managed in [publish.webmaker.org](https://github.com/mozilla/publish.webmaker.org)) to store users, projects, files and other content as well as publish user projects.
+Web Maker interacts with the Publish API (source managed in [publish.webmaker.org](https://github.com/mozilla/publish.webmaker.org)) to store users, projects, files and other content as well as publish user projects.
 
-For authentication and user management, Visual Editor uses Webmaker OAuth which consists of the Webmaker ID System (source managed in [id.webmaker.org](https://github.com/socialisewrld/id.webmaker.org)) and the Webmaker Login API (source managed in [login.webmaker.org](https://github.com/socialisewrld/login.webmaker.org)).
+For authentication and user management, Web Maker uses *Webmaker OAuth* which consists of the Webmaker ID System (source managed in [id.webmaker.org](https://github.com/socialisewrld/id.webmaker.org)) and the Webmaker Login API (source managed in [login.webmaker.org](https://github.com/socialisewrld/login.webmaker.org)).
 
 All three services are bundled together using Git subtrees to be run together using Vagrant, or, they may be run separately with Visual Editor [manually](#manual-installation).
 
@@ -58,7 +58,7 @@ Please note: On Windows, use ``copy`` instead of ``cp``
 - Run `npm start` to start a server that will allow the editor to be accessed on [http://localhost:8000/src](http://localhost:8000/src)
  -- You can find out more information about setting up Brackets locally by referring to the instructions [here](https://github.com/socialisewrld/brackets#how-to-setup-bramble-brackets-in-your-local-machine)
  
-#### Visual Editor
+#### Web Maker
 * Fork and clone this repository
 * Run ``npm install`` to install dependencies
 * Run ``npm run env`` to create an environment file

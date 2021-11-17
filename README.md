@@ -1,4 +1,4 @@
-# Web Maker
+# Web Maker Studio
 
 ## Setup/Installation
 

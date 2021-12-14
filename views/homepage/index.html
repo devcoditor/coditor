@@ -1,16 +1,16 @@
 {% extends "./base.html" %}
 
 {% block pagetitle %}
-  {{ gettext("thimbleHeading") | safe }}
+  {{ gettext("coditorHeading") | safe }}
 {% endblock %}
 
 {% block top %}
   <section class="get-started-feature">
     <div class="content-wrapper">
       <div class="left-side">
-        <h1>{{ gettext("thimbleTagLine") | safe }}</h1>
+        <h1>{{ gettext("coditorTagLine") | safe }}</h1>
         <p>
-          {{ gettext("thimbleDescription1") | safe }}
+          {{ gettext("coditorDescription1") | safe }}
         </p>
         {% if not shutdownNewProjectsAndPublishing %}
         <div class="new-project-button-wrapper">

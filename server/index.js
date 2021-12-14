@@ -58,9 +58,9 @@ requests
   });
 
 /**
- * Thimble Favicon
+ * Coditor Favicon
  */
-let faviconPath = path.join(root, "public/resources/img/favicon.png");
+let faviconPath = path.join(root, "public/resources/img/favicon.ico");
 server.use(favicon(faviconPath));
 
 requests.enableLogging(environment);

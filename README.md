@@ -1,9 +1,4 @@
 # Web Maker Studio
-<<<<<<< HEAD
-
-By leveraging WASM for software containerization, we create universal binaries that work live and anywhere without modification, including operating systems like Linux, macOS, Windows, and also web browsers. Wasm automatically sandboxes applications by default for secure execution, shielding the host environment from malicious code, bugs and vulnerabilities in the software it runs.
-=======
->>>>>>> 88a1afc805b4b9a6f2a1f64f82a76ee7e319718f
 
 ## Setup/Installation
 
@@ -60,11 +55,11 @@ Please note: On Windows, use ``copy`` instead of ``cp``
 
 #### Installing EditorX
 
-- Fork the [Brackets repository](https://github.com/devcoditor/editorx) and then clone it to your local machine using `git clone --recursive https://github.com/<your_username>/editorx.git` (replace `<your_username>` with your Github username for the account you forked Brackets into)
-- In the cloned repository directory, run `npm install` to install the dependencies for Brackets
+- Fork the [EditorX repository](https://github.com/devcoditor/editorx) and then clone it to your local machine using `git clone --recursive https://github.com/<your_username>/editorx.git` (replace `<your_username>` with your Github username for the account you forked EditorX into)
+- In the cloned repository directory, run `npm install` to install the dependencies for EditorX
 - Run `npm run build` to create the built editor files that will be used by Thimble
 - Run `npm start` to start a server that will allow the editor to be accessed on [http://localhost:8000/src](http://localhost:8000/src)
- -- You can find out more information about setting up Brackets locally by referring to the instructions [here](https://github.com/devcoditor/brackets#how-to-setup-editorx-in-your-local-machine)
+ -- You can find out more information about setting up EditorX locally by referring to the instructions [here](https://github.com/devcoditor/editorx#how-to-setup-editorx-in-your-local-machine)
 
 #### Web Maker
 

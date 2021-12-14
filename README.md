@@ -1,6 +1,9 @@
 # Web Maker Studio
+<<<<<<< HEAD
 
 By leveraging WASM for software containerization, we create universal binaries that work live and anywhere without modification, including operating systems like Linux, macOS, Windows, and also web browsers. Wasm automatically sandboxes applications by default for secure execution, shielding the host environment from malicious code, bugs and vulnerabilities in the software it runs.
+=======
+>>>>>>> 88a1afc805b4b9a6f2a1f64f82a76ee7e319718f
 
 ## Setup/Installation
 
